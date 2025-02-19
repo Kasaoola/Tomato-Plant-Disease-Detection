@@ -1,0 +1,9 @@
+to save: model.save(r'path_to_your_model_directory\my_model')
+
+to load:
+from tensorflow.keras.models import load_model
+
+model = load_model('path_to_your_model_director\my_model')
+
+# Now you can use the model for predictions or further training
+predictions = model.predict(new_data)
