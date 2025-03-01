@@ -1,4 +1,4 @@
-https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-2.8.0-cp38-cp38-win_amd64.whl
+tensorflow-cpu==2.8.0
 fastapi
 uvicorn
 python-multipart
