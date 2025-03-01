@@ -7,7 +7,7 @@ from io import BytesIO
 from PIL import Image
 import tensorflow as tf
 from starlette.middleware.cors import CORSMiddleware
-
+import os
 
 app = FastAPI()
 
@@ -23,8 +23,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Get the absolute path of the 'models' folder
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # Moves up one level from api/
+MODEL_PATH = os.path.join(BASE_DIR, "models", "1")  # Joins models/1 path
 
-MODEL = tf.keras.models.load_model("../models/1")
+# Load the model
+MODEL = tf.keras.models.load_model(MODEL_PATH)
+# MODEL = tf.keras.models.load_model("../models/1")
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato_Early_blight", "Tomato_Late_blight",
  "Tomato_Leaf_Mold", "Tomato_Septoria_leaf_spot", "Tomato_Spider_mites_Two_spotted_spider_mite",
  "Tomato__Target_Spot", "Tomato__Tomato_YellowLeaf__Curl_Virus", "Tomato__Tomato_mosaic_virus",
