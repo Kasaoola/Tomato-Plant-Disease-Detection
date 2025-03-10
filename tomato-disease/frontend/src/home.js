@@ -164,9 +164,13 @@ export const ImageUpload = () => {
       if (res.status === 200) {
         setData(res.data);
       }
+      catch (error){
+      console.error("Error:",error);
+      alert("Failed to get prediction. Please try again.");
+      }
       setIsloading(false);
     }
-  }
+  };
 
   const clearData = () => {
     setData(null);
