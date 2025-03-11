@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
   },
   gridContainer: {
+    display: "flex",
     justifyContent: "center",
     padding: "4em 1em 0 1em",
   },
@@ -157,6 +158,8 @@ export const ImageUpload = () => {
       let formData = new FormData();
       formData.append("file", selectedFile);
 
+      const API_URL = process.env.REACT_APP_API_URL || "https://final-project-ku.onrender.com/predict";
+
       try{
        let res = await axios({
         method: "post",
@@ -193,12 +196,17 @@ export const ImageUpload = () => {
   }, [selectedFile]);
 
   useEffect(() => {
-    if (!preview) {
-      return;
+    let isMounted = true;
+
+    if (preview) {
+      setIsloading(true);
+      sendFile();
     }
-    setIsloading(true);
-    sendFile();
-  }, [preview]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [preview, sendFile]);
 
   const onSelectFile = (files) => {
     if (!files || files.length === 0) {
@@ -242,8 +250,8 @@ export const ImageUpload = () => {
                 <CardMedia
                   className={classes.media}
                   image={preview}
-                  component="image"
-                  title="Contemplative Reptile"
+                  component="img"
+                  title="Upload Image"
                 />
               </CardActionArea>
               }
