@@ -14,7 +14,7 @@ app = FastAPI()
 
 origins = {
     "http://localhost",
-    "http://localhost:3000"
+    "http://localhost:3000",
     "https://final-project-frontend-0c0g.onrender.com"
 }
 app.add_middleware(
