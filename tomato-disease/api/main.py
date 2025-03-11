@@ -12,11 +12,11 @@ from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = {
+origins = [
     "http://localhost",
     "http://localhost:3000",
     "https://final-project-frontend-0c0g.onrender.com"
-}
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
