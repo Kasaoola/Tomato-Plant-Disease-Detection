@@ -8,16 +8,15 @@ import tensorflow as tf
 import uvicorn
 from PIL import Image
 from fastapi import FastAPI, File, UploadFile
-from flask_cors import CORS
 from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-CORS(app, origins=["https://final-project-frontend-0c0g.onrender.com"])
 
-origins = [
+origins = {
     "http://localhost",
     "http://localhost:3000"
-]
+    "https://final-project-frontend-0c0g.onrender.com"
+}
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
