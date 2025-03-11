@@ -156,19 +156,23 @@ export const ImageUpload = () => {
     if (image) {
       let formData = new FormData();
       formData.append("file", selectedFile);
-      let res = await axios({
+
+      try{
+       let res = await axios({
         method: "post",
         url: process.env.REACT_APP_API_URL,
         data: formData,
-      });
-      if (res.status === 200) {
+       });
+       if (res.status === 200) {
         setData(res.data);
+       }
       }
       catch (error){
       console.error("Error:",error);
       alert("Failed to get prediction. Please try again.");
-      }
+      } finally {
       setIsloading(false);
+      }
     }
   };
 
