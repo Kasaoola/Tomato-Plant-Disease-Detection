@@ -1,15 +1,18 @@
 
 
-import numpy as np
-from fastapi import FastAPI, File, UploadFile
-import uvicorn
-from io import BytesIO
-from PIL import Image
-import tensorflow as tf
-from starlette.middleware.cors import CORSMiddleware
 import os
+from io import BytesIO
+
+import numpy as np
+import tensorflow as tf
+import uvicorn
+from PIL import Image
+from fastapi import FastAPI, File, UploadFile
+from flask_cors import CORS
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+CORS(app, origins=["https://final-project-frontend-0c0g.onrender.com"])
 
 origins = [
     "http://localhost",
