@@ -25,9 +25,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Get the absolute path of the 'models' folder
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # Moves up one level from api/
-MODEL_PATH = os.path.join(BASE_DIR, "models", "1")  # Joins models/1 path
+# For Local host
+# BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # Moves up one level from api/
+# MODEL_PATH = os.path.join(BASE_DIR, "models", "1")  # Joins models/1 path
+
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "1")
+MODEL_PATH = os.path.abspath(MODEL_PATH)
+MODEL = tf.keras.models.load_model(MODEL_PATH)
 
 # Load the model
 MODEL = tf.keras.models.load_model(MODEL_PATH)
@@ -61,6 +65,10 @@ async def predict(
         'confidence': float(confidence)
     }
 
-if __name__=="__main__":
-    uvicorn.run(app, host='localhost', port=8000)
+#For local host
+# if __name__=="__main__":
+#     uvicorn.run(app, host='localhost', port=8000)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
 
