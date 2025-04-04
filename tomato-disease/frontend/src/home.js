@@ -1,61 +1,37 @@
 import { useState, useEffect } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
-import Container from "@material-ui/core/Container";
-import React from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import { Paper, CardActionArea, CardMedia, Grid, TableContainer, Table, TableBody, TableHead, TableRow, TableCell, Button, CircularProgress } from "@material-ui/core";
+import {
+  AppBar, Toolbar, Typography, Avatar, Container, Grid, Button,
+  Card, CardContent, CardMedia, CircularProgress, Paper
+} from "@material-ui/core";
+import { DropzoneArea } from 'material-ui-dropzone';
+import Clear from '@material-ui/icons/Clear';
 import KULogoColor from "./KU-Logo-Color.png";
 import image from "./bg.png";
-import { DropzoneArea } from 'material-ui-dropzone';
 import { common } from '@material-ui/core/colors';
-import Clear from '@material-ui/icons/Clear';
+import axios from "axios";
 
-
-
-
-const ColorButton = withStyles((theme) => ({
+const ColorButton = withStyles(() => ({
   root: {
-    color: theme.palette.getContrastText(common.white),
+    color: "black",
     backgroundColor: common.white,
     '&:hover': {
       backgroundColor: '#ffffff7a',
     },
   },
 }))(Button);
-const axios = require("axios").default;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   grow: {
     flexGrow: 1,
   },
   clearButton: {
-    width: "-webkit-fill-available",
+    width: "100%",
     borderRadius: "15px",
-    padding: "15px 22px",
+    padding: "12px",
     color: "#000000a6",
-    fontSize: "20px",
-    fontWeight: 900,
-  },
-  root: {
-    maxWidth: 345,
-    flexGrow: 1,
-  },
-  media: {
-    height: 400,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: 500,
-  },
-  gridContainer: {
-    justifyContent: "center",
-    padding: "4em 1em 0 1em",
+    fontSize: "16px",
+    fontWeight: 600,
   },
   mainContainer: {
     backgroundImage: `url(${image})`,
@@ -64,233 +40,182 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     height: "93vh",
     marginTop: "8px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  gridContainer: {
+    width: "80%",
+    maxWidth: "1200px",
   },
   imageCard: {
-    margin: "auto",
-    maxWidth: 400,
-    height: 500,
+    maxWidth: "100%",
+    height: "auto",
     backgroundColor: 'transparent',
-    boxShadow: '0px 9px 70px 0px rgb(0 0 0 / 30%) !important',
+    boxShadow: '0px 5px 20px rgb(0 0 0 / 20%)',
     borderRadius: '15px',
+    textAlign: "center",
   },
-  imageCardEmpty: {
-    height: 'auto',
-  },
-  noImage: {
-    margin: "auto",
-    width: 400,
-    height: "400 !important",
-  },
-  input: {
-    display: 'none',
-  },
-  uploadIcon: {
-    background: 'white',
-  },
-  tableContainer: {
-    backgroundColor: 'transparent !important',
-    boxShadow: 'none !important',
-  },
-  table: {
-    backgroundColor: 'transparent !important',
-  },
-  tableHead: {
-    backgroundColor: 'transparent !important',
-  },
-  tableRow: {
-    backgroundColor: 'transparent !important',
-  },
-  tableCell: {
-    fontSize: '22px',
-    backgroundColor: 'transparent !important',
-    borderColor: 'transparent !important',
-    color: '#000000a6 !important',
-    fontWeight: 'bolder',
-    padding: '1px 24px 1px 16px',
-  },
-  tableCell1: {
-    fontSize: '14px',
-    backgroundColor: 'transparent !important',
-    borderColor: 'transparent !important',
-    color: '#000000a6 !important',
-    fontWeight: 'bolder',
-    padding: '1px 24px 1px 16px',
-  },
-  tableBody: {
-    backgroundColor: 'transparent !important',
-  },
-  text: {
-    color: 'white !important',
-    textAlign: 'center',
-  },
-  buttonGrid: {
-    maxWidth: "416px",
+  media: {
     width: "100%",
+    maxHeight: "300px",
+    objectFit: "contain",
+  },
+  uploadArea: {
+    border: "2px dashed #fff",
+    padding: "20px",
+    borderRadius: "15px",
+    backgroundColor: "rgba(255,255,255,0.1)",
   },
   detail: {
     backgroundColor: 'white',
     display: 'flex',
-    justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: "20px",
+    borderRadius: "15px",
+    textAlign: "center",
+    minHeight: "200px",
+  },
+  descriptionBox: {
+    backgroundColor: "#f0f8ff", // Light blue for visual separation
+    padding: "15px",
+    marginTop: "15px",
+    borderRadius: "10px",
+    textAlign: "center",
+  },
+  descriptionText: {
+    marginTop: "15px",
+    fontSize: "16px",
+    color: "#333",
   },
   appbar: {
     background: '#006400',
     boxShadow: 'none',
     color: 'white'
   },
+  kuDetails: {
+    marginLeft: "10px",
+    display: "flex",
+    flexDirection: "column",
+    color: "white",
+  },
   loader: {
     color: '#be6a77 !important',
+    marginTop: "15px",
   }
 }));
+
+const diseaseDescriptions = {
+  "Tomato Bacterial spot": "A bacterial infection causing dark, water-soaked spots on leaves and fruits. Small, circular-to-irregular dark lesions on leaves, often surrounded by a yellow halo.",
+  "Tomato Early blight": "A fungal disease causing dark, concentric-ring lesions on older leaves and stems.",
+  "Tomato Late blight": "A highly destructive disease that spreads rapidly in wet conditions. Irregularly shaped, water-soaked lesions that enlarge rapidly into pale green to brownish-black blotches. During humid conditions, a white cottony growth may form on the underside of the leaves",
+  "Tomato Leaf Mold": "Causes yellow spots on leaves with fuzzy, purple mold underneath.",
+  "Tomato Septoria leaf spot": "Produces small, circular spots with gray centers and dark borders.",
+  "Tomato Spider mites Two spotted spider mite": "Leads to yellowing and speckled leaves covered with fine webbing.",
+  "Tomato Target Spot": "Creates circular, dark brown spots with concentric rings on leaves.",
+  "Tomato Tomato YellowLeaf Curl Virus": "Causes yellowing, curling of leaves, and stunted plant growth.",
+  "Tomato Tomato mosaic virus": "Creates mottled, yellow-green patterns on leaves, affecting fruit quality.",
+  "Tomato healthy": "The tomato plant appears to be in good health with no visible disease."
+};
+
 export const ImageUpload = () => {
   const classes = useStyles();
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState();
-  const [data, setData] = useState();
-  const [image, setImage] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [data, setData] = useState(null);
   const [isLoading, setIsloading] = useState(false);
-  let confidence = 0;
 
   const sendFile = async () => {
-    if (image) {
-      let formData = new FormData();
-      formData.append("file", selectedFile);
-
-      try{
-       let res = await axios({
-        method: "post",
-        url: process.env.REACT_APP_API_URL,
-        data: formData,
-       });
-       if (res.status === 200) {
-        setData(res.data);
-       }
-      }
-      catch (error){
-      console.error("Error:",error);
+    if (!selectedFile) return;
+    let formData = new FormData();
+    formData.append("file", selectedFile);
+    try {
+      let res = await axios.post(process.env.REACT_APP_API_URL, formData);
+      if (res.status === 200) setData(res.data);
+    } catch (error) {
+      console.error("Error:", error);
       alert("Failed to get prediction. Please try again.");
-      } finally {
+    } finally {
       setIsloading(false);
-      }
     }
   };
 
   const clearData = () => {
     setData(null);
-    setImage(false);
     setSelectedFile(null);
     setPreview(null);
   };
 
   useEffect(() => {
-    if (!selectedFile) {
-      setPreview(undefined);
-      return;
-    }
+    if (!selectedFile) return;
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
-  }, [selectedFile]);
-
-  useEffect(() => {
-    if (!preview) {
-      return;
-    }
     setIsloading(true);
     sendFile();
-  }, [preview]);
-
-  const onSelectFile = (files) => {
-    if (!files || files.length === 0) {
-      setSelectedFile(undefined);
-      setImage(false);
-      setData(undefined);
-      return;
-    }
-    setSelectedFile(files[0]);
-    setData(undefined);
-    setImage(true);
-  };
-
-  if (data) {
-    confidence = (parseFloat(data.confidence) * 100).toFixed(2);
-  }
+  }, [selectedFile]);
 
   return (
-    <React.Fragment>
+    <>
       <AppBar position="static" className={classes.appbar}>
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Tomato Disease Classification
-          </Typography>
+          <Typography variant="h6" noWrap>Tomato Disease Classification</Typography>
           <div className={classes.grow} />
-          <Avatar src={KULogoColor}></Avatar>
+          <Avatar src={KULogoColor} />
+          <div className={classes.kuDetails}>
+            <Typography variant="body1">Kathmandu University</Typography>
+            <Typography variant="body2">Department of Electrical and Electronics Engineering</Typography>
+          </div>
         </Toolbar>
       </AppBar>
-      <Container maxWidth={false} className={classes.mainContainer} disableGutters={true}>
-        <Grid
-          className={classes.gridContainer}
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-        >
-          <Grid item xs={12}>
-            <Card className={`${classes.imageCard} ${!image ? classes.imageCardEmpty : ''}`}>
-              {image && <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image={preview}
-                  component="image"
-                  title="Contemplative Reptile"
-                />
-              </CardActionArea>
-              }
-              {!image && <CardContent className={classes.content}>
-                <DropzoneArea
-                  acceptedFiles={['image/*']}
-                  dropzoneText={"Drag and drop an image of a tomato plant leaf to process"}
-                  onChange={onSelectFile}
-                />
-              </CardContent>}
-              {data && <CardContent className={classes.detail}>
-                <TableContainer component={Paper} className={classes.tableContainer}>
-                  <Table className={classes.table} size="small" aria-label="simple table">
-                    <TableHead className={classes.tableHead}>
-                      <TableRow className={classes.tableRow}>
-                        <TableCell className={classes.tableCell1}>Label:</TableCell>
-                        <TableCell align="right" className={classes.tableCell1}>Confidence:</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody className={classes.tableBody}>
-                      <TableRow className={classes.tableRow}>
-                        <TableCell component="th" scope="row" className={classes.tableCell}>
-                          {data.class}
-                        </TableCell>
-                        <TableCell align="right" className={classes.tableCell}>{confidence}%</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>}
-              {isLoading && <CardContent className={classes.detail}>
-                <CircularProgress color="secondary" className={classes.loader} />
-                <Typography className={classes.title} variant="h6" noWrap>
-                  Processing
-                </Typography>
-              </CardContent>}
+
+      <Container className={classes.mainContainer} maxWidth={false} disableGutters={true}>
+        <Grid container className={classes.gridContainer} spacing={4}>
+
+          {/* Left: Upload Section */}
+          <Grid item xs={12} md={6}>
+            <Card className={classes.imageCard}>
+              <CardContent>
+                {!preview ? (
+                  <DropzoneArea
+                    acceptedFiles={['image/*']}
+                    dropzoneText={"Drag & Drop an image of a tomato leaf here or click to upload"}
+                    onChange={(files) => {
+                      if (files.length > 0) setSelectedFile(files[0]);
+                    }}
+                    className={classes.uploadArea}
+                  />
+                ) : (
+                  <CardMedia className={classes.media} image={preview} component="img" />
+                )}
+              </CardContent>
             </Card>
           </Grid>
-          {data &&
-            <Grid item className={classes.buttonGrid} >
 
-              <ColorButton variant="contained" className={classes.clearButton} color="primary" component="span" size="large" onClick={clearData} startIcon={<Clear fontSize="large" />}>
-                Clear
-              </ColorButton>
-            </Grid>}
-        </Grid >
-      </Container >
-    </React.Fragment >
+          {/* Right: Results Section */}
+          <Grid item xs={12} md={6}>
+            <Card className={classes.detail}>
+              {isLoading ? (
+                <>
+                  <CircularProgress className={classes.loader} />
+                  <Typography variant="h6">Processing...</Typography>
+                </>
+              ) : data ? (
+                <>
+                  <Typography variant="h5"><strong>Classified as: </strong> <strong>{data.class}</strong></Typography>
+                  <Typography variant="h6">Confidence Level:{(parseFloat(data.confidence) * 100).toFixed(2)}%</Typography>
+
+                  <Paper elevation={3} className={classes.descriptionBox}>
+                  <Typography className={classes.descriptionText}>{diseaseDescriptions[data.class]}</Typography>
+                  </Paper>
+                  <ColorButton className={classes.clearButton} onClick={clearData} startIcon={<Clear />}>Clear</ColorButton>
+                </>
+              ) : null}
+            </Card>
+          </Grid>
+
+        </Grid>
+      </Container>
+    </>
   );
 };

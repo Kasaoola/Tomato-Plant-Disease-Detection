@@ -31,11 +31,11 @@ MODEL_PATH = os.path.join(BASE_DIR, "models", "1")  # Joins models/1 path
 
 # Load the model
 MODEL = tf.keras.models.load_model(MODEL_PATH)
-# MODEL = tf.keras.models.load_model("../models/1")
-CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato_Early_blight", "Tomato_Late_blight",
- "Tomato_Leaf_Mold", "Tomato_Septoria_leaf_spot", "Tomato_Spider_mites_Two_spotted_spider_mite",
- "Tomato__Target_Spot", "Tomato__Tomato_YellowLeaf__Curl_Virus", "Tomato__Tomato_mosaic_virus",
- "Tomato_healthy"]
+
+CLASS_NAMES = ["Tomato Bacterial spot", "Tomato Early blight", "Tomato Late blight",
+ "Tomato Leaf Mold", "Tomato Septoria leaf spot", "Tomato Spider mites Two spotted spider mite",
+ "Tomato Target Spot", "Tomato Tomato YellowLeaf Curl Virus", "Tomato Tomato mosaic virus",
+ "Tomato healthy"]
 
 @app.get("/ping")
 async def ping():
