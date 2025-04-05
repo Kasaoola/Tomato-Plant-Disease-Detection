@@ -15,7 +15,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
-    "https://final-project-frontend-0c0g.onrender.com"
+    "https://tomato-disease-detection-g6fnbjbwa7edhrc7.eastasia-01.azurewebsites.net"
 ]
 app.add_middleware(
     CORSMiddleware,
