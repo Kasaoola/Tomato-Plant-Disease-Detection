@@ -1,6 +1,7 @@
 tensorflow-cpu==2.10.0
 fastapi
 uvicorn
+gunicorn
 python-multipart
 pillow
 tensorflow-serving-api==2.10.0
