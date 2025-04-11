@@ -10,6 +10,7 @@ import KULogoColor from "./KU-Logo-Color.png";
 import image from "./bg.png";
 import { common } from '@material-ui/core/colors';
 import axios from "axios";
+import { useCallback } from "react";
 
 const ColorButton = withStyles(() => ({
   root: {
@@ -126,34 +127,57 @@ export const ImageUpload = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsloading] = useState(false);
 
-  const sendFile = async () => {
-    if (!selectedFile) return;
-    let formData = new FormData();
-    formData.append("file", selectedFile);
-    try {
-      let res = await axios.post(process.env.REACT_APP_API_URL, formData);
-      if (res.status === 200) setData(res.data);
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to get prediction. Please try again.");
-    } finally {
-      setIsloading(false);
-    }
-  };
+//  const sendFile = async () => {
+//    if (!selectedFile) return;
+//    let formData = new FormData();
+//    formData.append("file", selectedFile);
+//    try {
+//      let res = await axios.post(process.env.REACT_APP_API_URL, formData);
+//      if (res.status === 200) setData(res.data);
+//    } catch (error) {
+//      console.error("Error:", error);
+//      alert("Failed to get prediction. Please try again.");
+//    } finally {
+//      setIsloading(false);
+//    }
+//  };
+
+const sendFile = useCallback(async () => {
+  if (!selectedFile) return;
+  let formData = new FormData();
+  formData.append("file", selectedFile);
+  try {
+    let res = await axios.post(process.env.REACT_APP_API_URL, formData);
+    if (res.status === 200) setData(res.data);
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Failed to get prediction. Please try again.");
+  } finally {
+    setIsloading(false);
+  }
+}, [selectedFile]);
 
   const clearData = () => {
     setData(null);
     setSelectedFile(null);
     setPreview(null);
   };
+//
+//  useEffect(() => {
+//    if (!selectedFile) return;
+//    const objectUrl = URL.createObjectURL(selectedFile);
+//    setPreview(objectUrl);
+//    setIsloading(true);
+//    sendFile();
+//  }, [selectedFile]);
 
-  useEffect(() => {
-    if (!selectedFile) return;
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl);
-    setIsloading(true);
-    sendFile();
-  }, [selectedFile]);
+useEffect(() => {
+  if (!selectedFile) return;
+  const objectUrl = URL.createObjectURL(selectedFile);
+  setPreview(objectUrl);
+  setIsloading(true);
+  sendFile();
+}, [selectedFile, sendFile]);
 
   return (
     <>
