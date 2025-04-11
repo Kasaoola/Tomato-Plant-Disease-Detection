@@ -16,12 +16,26 @@ jobs:
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
         with:
-          submodules: true
-          lfs: false
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: tomato-disease/frontend
+
+        # with:
+        #   submodules: true
+        #   lfs: false
 
       - name: Set legacy OpenSSL provider for Webpack
         run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+
+      - name: Build
+        run: npm run build
+        working-directory: tomato-disease/frontend
         
       - name: Build And Deploy
         id: builddeploy
