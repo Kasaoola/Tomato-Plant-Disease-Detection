@@ -33,8 +33,11 @@ jobs:
       - name: Set legacy OpenSSL provider for Webpack
         run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
 
-      - name: Set Node.js legacy OpenSSL option
-        run: export NODE_OPTIONS=--openssl-legacy-provider
+      # - name: Set Node.js legacy OpenSSL option
+      #   run: export NODE_OPTIONS=--openssl-legacy-provider
+
+      - name: Build React App
+        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
 
       - name: Build
         run: npm run build
