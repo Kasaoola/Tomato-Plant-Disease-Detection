@@ -33,6 +33,9 @@ jobs:
       - name: Set legacy OpenSSL provider for Webpack
         run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
 
+      - name: Set Node.js legacy OpenSSL option
+        run: export NODE_OPTIONS=--openssl-legacy-provider
+
       - name: Build
         run: npm run build
         working-directory: tomato-disease/frontend
