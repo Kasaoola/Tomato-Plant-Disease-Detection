@@ -35,6 +35,9 @@ jobs:
 
       # # - name: Set Node.js legacy OpenSSL option
       # #   run: export NODE_OPTIONS=--openssl-legacy-provider
+      - name: Clear NODE_OPTIONS
+        run: unset NODE_OPTIONS
+
 
       - name: Build React App
         run: npm run build
