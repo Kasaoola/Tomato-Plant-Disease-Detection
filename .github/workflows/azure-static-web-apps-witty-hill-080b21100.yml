@@ -30,14 +30,14 @@ jobs:
         #   submodules: true
         #   lfs: false
 
-      - name: Set legacy OpenSSL provider for Webpack
-        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+      # - name: Set legacy OpenSSL provider for Webpack
+      #   run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
 
-      # - name: Set Node.js legacy OpenSSL option
-      #   run: export NODE_OPTIONS=--openssl-legacy-provider
+      # # - name: Set Node.js legacy OpenSSL option
+      # #   run: export NODE_OPTIONS=--openssl-legacy-provider
 
-      - name: Build React App
-        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
+      # - name: Build React App
+      #   run: NODE_OPTIONS=--openssl-legacy-provider npm run build
 
       - name: Build
         run: npm run build
@@ -53,7 +53,7 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "./tomato-disease/frontend" # App source code path
-          #api_location: "/api" # Api source code path - optional
+          api_location: "./tomato-disease/api" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
