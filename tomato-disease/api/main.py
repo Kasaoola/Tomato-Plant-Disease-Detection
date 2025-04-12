@@ -15,7 +15,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
-    "https://tomato-disease-detection-g6fnbjbwa7edhrc7.eastasia-01.azurewebsites.net"
+    "https://tomato-disease-detection-g6fnbjbwa7edhrc7.eastasia-01.azurewebsites.net",
     "https://witty-hill-080b21100.6.azurestaticapps.net"
 ]
 app.add_middleware(
@@ -32,7 +32,6 @@ app.add_middleware(
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "1")
 MODEL_PATH = os.path.abspath(MODEL_PATH)
-MODEL = tf.keras.models.load_model(MODEL_PATH)
 
 # Load the model
 MODEL = tf.keras.models.load_model(MODEL_PATH)
