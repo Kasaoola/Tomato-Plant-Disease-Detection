@@ -24,22 +24,27 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Create and start virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
+      # - name: Create and start virtual environment
+      #   run: |
+      #     python -m venv venv
+      #     source venv/bin/activate
       
+      # - name: Install dependencies
+      #   working-directory: ./tomato-disease/clean-api
+      #   # working-directory: ./tomato-disease/api
+      #   run: pip install -r requirements.txt --target ./python_packages  # Critical for Azure
       - name: Install dependencies
         working-directory: ./tomato-disease/clean-api
-        # working-directory: ./tomato-disease/api
-        run: pip install -r requirements.txt
-        
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt --target ./python_packages  # Install to project dir
+  
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./*
+        # run: zip -r release.zip ./*
         working-directory: ./tomato-disease/clean-api
-        # run: zip -r release.zip ./tomato-disease/api
+        run: zip -r release.zip ./*
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -47,7 +52,6 @@ jobs:
           name: python-app
           path: ./tomato-disease/clean-api/release.zip
         
-  #!venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -64,6 +68,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
+          path: ./tomato-disease/clean-api #new
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
