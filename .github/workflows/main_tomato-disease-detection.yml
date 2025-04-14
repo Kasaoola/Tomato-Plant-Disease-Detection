@@ -36,20 +36,22 @@ jobs:
   
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
-      - name: Zip artifact for deployment
-        run: zip -r release.zip ./*
-        working-directory: ./tomato-disease
+      # - name: Zip artifact for deployment
+      #   run: zip -r release.zip ./*
+      #   working-directory: ./tomato-disease
         # working-directory: ./tomato-disease/api
-        # working-directory: ./tomato-disease/clean-api
-        # run: zip -r release.zip ./*
+      - name: Zip artifact for deployment
+        run: |
+          cd tomato-disease
+          zip -r ../release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          # path: ./tomato-disease/clean-api/release.zip
+          path: release.zip
           # path: ./tomato-disease/api/release.zip
-          path: ./tomato-disease/release.zip
+          # path: ./tomato-disease/release.zip
         
 
   deploy:
