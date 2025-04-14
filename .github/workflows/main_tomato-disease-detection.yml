@@ -30,22 +30,24 @@ jobs:
       #     source venv/bin/activate
       
       - name: Install dependencies
-        working-directory: ./tomato-disease/clean-api
-        # working-directory: ./tomato-disease/api
+        # working-directory: ./tomato-disease/clean-api
+        working-directory: ./tomato-disease/api
         run: pip install -r requirements.txt  # Critical for Azure
   
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
         run: zip -r release.zip ./*
-        working-directory: ./tomato-disease/clean-api
+        working-directory: ./tomato-disease/api
+        # working-directory: ./tomato-disease/clean-api
         # run: zip -r release.zip ./*
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: ./tomato-disease/clean-api/release.zip
+          # path: ./tomato-disease/clean-api/release.zip
+          path: ./tomato-disease/api/release.zip
         
 
   deploy:
