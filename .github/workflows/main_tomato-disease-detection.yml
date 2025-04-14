@@ -38,7 +38,8 @@ jobs:
 
       - name: Zip artifact for deployment
         run: zip -r release.zip ./*
-        working-directory: ./tomato-disease/api
+        working-directory: ./tomato-disease
+        # working-directory: ./tomato-disease/api
         # working-directory: ./tomato-disease/clean-api
         # run: zip -r release.zip ./*
 
@@ -47,7 +48,8 @@ jobs:
         with:
           name: python-app
           # path: ./tomato-disease/clean-api/release.zip
-          path: ./tomato-disease/api/release.zip
+          # path: ./tomato-disease/api/release.zip
+          path: ./tomato-disease/release.zip
         
 
   deploy:
