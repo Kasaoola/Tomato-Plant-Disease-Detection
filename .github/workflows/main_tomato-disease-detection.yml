@@ -31,19 +31,19 @@ jobs:
       
       - name: Install dependencies
         # working-directory: ./tomato-disease/clean-api
-        working-directory: ./tomato-disease/api
+        working-directory: ./tomato-disease
         run: pip install -r requirements.txt  # Critical for Azure
   
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
-      # - name: Zip artifact for deployment
-      #   run: zip -r release.zip ./*
-      #   working-directory: ./tomato-disease
-        # working-directory: ./tomato-disease/api
       - name: Zip artifact for deployment
-        run: |
-          cd tomato-disease
-          zip -r ../release.zip .
+        run: zip -r release.zip ./*
+        working-directory: ./tomato-disease
+      
+      # - name: Zip artifact for deployment
+      #   run: |
+      #     cd tomato-disease
+      #     zip -r ../release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
