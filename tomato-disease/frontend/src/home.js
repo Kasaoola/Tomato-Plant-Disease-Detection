@@ -147,7 +147,9 @@ const sendFile = useCallback(async () => {
   let formData = new FormData();
   formData.append("file", selectedFile);
   try {
-    let res = await axios.post(process.env.REACT_APP_API_URL, formData);
+//    let res = await axios.post(process.env.REACT_APP_API_URL, formData);
+    let res = await axios.post('https://tomato-disease-detection-g6fnbjbwa7edhrc7.eastasia-01.azurewebsites.net/predict', formData);
+
     if (res.status === 200) setData(res.data);
   } catch (error) {
     console.error("Error:", error);
