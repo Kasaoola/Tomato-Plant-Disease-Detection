@@ -148,7 +148,7 @@ const sendFile = useCallback(async () => {
   formData.append("file", selectedFile);
   try {
 //    let res = await axios.post(process.env.REACT_APP_API_URL, formData);
-//    let res = await axios.post(`${process.env.REACT_APP_API_URL}/predict`, formData);
+//    let res = await axios.post(`${process.env.REACT_APP_API_URL}/predict`, formData) ;
     let res = await axios.post('https://tomato-disease-detection-docker-d9ehgeexdfdbdff0.eastasia-01.azurewebsites.net/predict', formData);
 
 
