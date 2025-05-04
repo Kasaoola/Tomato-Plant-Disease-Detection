@@ -13,15 +13,15 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# origins = [
+origins = [
 #     "http://localhost",
-#     "http://localhost:3000",
+    "http://localhost:3000",
 #     # "https://tomato-disease-detection-g6fnbjbwa7edhrc7.eastasia-01.azurewebsites.net", #backend url
-#     "https://witty-hill-080b21100.6.azurestaticapps.net" #frontend url
-# ]
+    "https://witty-hill-080b21100.6.azurestaticapps.net" #frontend url
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://witty-hill-080b21100.6.azurestaticapps.net"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
