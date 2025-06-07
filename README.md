@@ -83,16 +83,18 @@ Architecture: Convolutional Neural Network (CNN)
 Dataset: Data are taken from PlantVIllage Dataset. The data has different types of diseases for tomato leaves. The dataset can be viewed in the folder: tomato-disease --> training --> PlantVillage
 Here are the list:
 
-Tomato_mosaic_virus
-Target_Spot
-Bacterial_spot
-Tomato_Yellow_Leaf_Curl_Virus
-Late_blight
-Leaf_Mold
-Early_blight
-Spider_mites Two-spotted_spider_mite
-Tomato___healthy
-Septoria_leaf_spot
+- Tomato_mosaic_virus  
+- Target_Spot  
+- Bacterial_spot  
+- Tomato_Yellow_Leaf_Curl_Virus  
+- Late_blight  
+- Leaf_Mold  
+- Early_blight  
+- Spider_mites  
+- Two-spotted_spider_mite  
+- Tomato___healthy  
+- Septoria_leaf_spot
+
 
 Training: Different models have been trained using different optimizers like Adam, SGD, RMSprop and Adagrad. Also dropoyt layers have been added to analyze the difference in the model along with changes in parameters like batch size, image size and number of layers. The models can be seen in the folder: tomato-disease --> training
 
