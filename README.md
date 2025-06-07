@@ -22,7 +22,7 @@ Automated Disease Detection: Identifies and classifies tomato plant diseases fro
 
 Web Interface: User-friendly frontend for uploading images and viewing results.
 
-RESTful API: Backend built with FastAPI to handle requests and model inference.
+FastAPI: Backend built with FastAPI to handle requests and model inference.
 
 Containerization: Dockerized application for easy deployment.
 
