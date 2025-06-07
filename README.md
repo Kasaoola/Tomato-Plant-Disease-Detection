@@ -5,26 +5,14 @@ This project leverages a Convolutional Neural Network (CNN) to detect and classi
 Overview
 
 Features
-
 Tech Stack
-
 Project Structure
-
 Installation & Setup
-
 Usage Guide
-
 Model Details
-
 Results
-
 Limitations & Challenges
-
-Future Work
-
 Contributors
-
-License
 
 📖 Overview
 The goal of this project is to assist farmers and agricultural professionals by providing an automated system to detect common tomato plant diseases through image analysis. By utilizing deep learning techniques, specifically CNNs, the system can identify and classify diseases, enabling timely interventions and reducing crop losses.
