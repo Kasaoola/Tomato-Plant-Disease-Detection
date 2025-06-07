@@ -37,19 +37,16 @@ Machine Learning: Convolutional Neural Network (CNN)
 Containerization: Docker
 
 Cloud Platform: Microsoft Azure
-arxiv.org
-+1
-arxiv.org
-+1
 
 ## 📁 Project Structure ##
-bash
-Copy
-Edit
 
-<pre> ``` Tomato-Plant-Disease-Detection/ ├── .github/workflows/ # GitHub Actions workflows ├── tomato-disease/ # Main folder ├── training/ # Main models codes ├── model_evaluations/ # Evaluation docs for models ├── README.md # Project documentation └── requirements.txt # Python dependencies ``` </pre>
-## ⚙️ Installation & Setup ##
-Clone the repository:
+- [`tomato-disease/`](./tomato-disease) – Main application code
+- [`training/`](./training) – Model training scripts
+- [`model_evaluations/`](./model_evaluations) – Model evaluation docs
+- [`requirements.txt`](./requirements.txt) – Python dependencies
+- [`.github/workflows/`](./.github/workflows) – GitHub Actions workflows
+- [`README.md`](./README.md) – Project documentation
+
 
 bash
 Copy
