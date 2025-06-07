@@ -47,37 +47,6 @@ Cloud Platform: Microsoft Azure
 - [`.github/workflows/`](./.github/workflows) – GitHub Actions workflows
 - [`README.md`](./README.md) – Project documentation
 
-
-bash
-
-Copy
-
-Edit
-
-git clone https://github.com/Kasaoola/Tomato-Plant-Disease-Detection.git
-
-cd Tomato-Plant-Disease-Detection
-
-Set up the backend:
-
-bash
-
-Copy
-
-Edit
-
-cd tomato-disease
-
-pip install -r requirements.txt
-
-uvicorn main:app --reload
-
-Set up the frontend:
-Instructions for setting up the React.js frontend would go here. Please provide details if available.
-
-Access the application:
-Navigate to http://localhost:8000 in your web browser to use the application.
-
 ## 🚀 Usage Guide ##
 Open the web application in your browser.
 
@@ -86,7 +55,6 @@ Upload a clear image of a tomato leaf.
 Submit the image for analysis.
 
 View the predicted disease classification and confidence score.
-arxiv.org
 
 ## 🧠 Model Details ##
 Architecture: Convolutional Neural Network (CNN)
