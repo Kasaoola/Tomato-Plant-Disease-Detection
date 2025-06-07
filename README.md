@@ -49,18 +49,29 @@ Cloud Platform: Microsoft Azure
 
 
 bash
+
 Copy
+
 Edit
+
 git clone https://github.com/Kasaoola/Tomato-Plant-Disease-Detection.git
+
 cd Tomato-Plant-Disease-Detection
+
 Set up the backend:
 
 bash
+
 Copy
+
 Edit
+
 cd tomato-disease
+
 pip install -r requirements.txt
+
 uvicorn main:app --reload
+
 Set up the frontend:
 Instructions for setting up the React.js frontend would go here. Please provide details if available.
 
