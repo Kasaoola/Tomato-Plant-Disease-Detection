@@ -81,6 +81,7 @@ arxiv.org
 Architecture: Convolutional Neural Network (CNN)
 
 Dataset: Data are taken from PlantVIllage Dataset. The data has different types of diseases for tomato leaves. The dataset can be viewed in the folder: tomato-disease --> training --> PlantVillage
+
 Here are the list:
 
 - Tomato_mosaic_virus  
