@@ -1,4 +1,4 @@
-## Tomato Plant Disease Detection using CNN ##
+## Tomato Plant Disease Prediction using CNN ##
 This project leverages a Convolutional Neural Network (CNN) to detect and classify tomato plant diseases from leaf images. The backend is built with FastAPI, while the frontend offers a user-friendly interface for image uploads and result visualization. The full-stack application is containerized with Docker and was deployed on Microsoft Azure.
 
 ## 📖 Overview ##
